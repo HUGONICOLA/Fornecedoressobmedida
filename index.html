@@ -1,6 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
+<head> <!-- META PIXEL -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;
+n.push=n;
+n.loaded=!0;
+n.version='2.0';
+n.queue=[];
+t=b.createElement(e);
+t.async=!0;
+t.src=v;
+s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}
+(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1626823211705758');
+fbq('track', 'PageView');
+</script>
+
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1626823211705758&ev=PageView&noscript=1"/>
+</noscript>
+<!-- END META PIXEL -->
+
+
+
+<!-- TRACK QUIZ -->
+<script>
+(function(){
+
+    // evita evento duplicado
+    let etapaAtual = 0;
+
+    // FUNÇÃO PRINCIPAL
+    function trackEtapa(numero){
+
+        if(etapaAtual === numero) return;
+
+        etapaAtual = numero;
+
+        console.log("TRACK ETAPA:", numero);
+
+        // EVENTO PERSONALIZADO
+        fbq('trackCustom', 'QuizStep', {
+            etapa: numero
+        });
+
+        // EVENTOS INDIVIDUAIS
+        fbq('trackCustom', 'QuizStep' + numero);
+
+        // EVENTOS ESPECIAIS
+        switch(numero){
+
+            case 1:
+                fbq('track', 'ViewContent');
+                break;
+
+            case 2:
+                fbq('trackCustom', 'QuizEngaged');
+                break;
+
+            case 3:
+                fbq('trackCustom', 'HalfQuiz');
+                break;
+
+            case 4:
+                fbq('trackCustom', 'HighIntent');
+                break;
+
+            case 5:
+                fbq('trackCustom', 'AlmostThere');
+                break;
+
+            case 6:
+                fbq('trackCustom', 'FinalStep');
+                break;
+
+            case 7:
+
+                // OFERTA FINAL
+                fbq('track', 'InitiateCheckout');
+
+                fbq('trackCustom', 'OfferPageView');
+
+                break;
+        }
+    }
+
+    // DEIXA GLOBAL
+    window.trackEtapa = trackEtapa;
+
+})();
+</script>
+<!-- END TRACK QUIZ -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FornecedorCerto — Seu Perfil</title>
